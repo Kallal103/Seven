@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //return env('APP_NAME');
     return view('welcome');
 });
 
 Route::get('/user', 'UserController@index');
+Route::post('/upload', function(Request $request){
+    $request->image->store('images', 'public');
+    return 'uploadeddd';
+    //dd($request->hasFile('image'));
+});
 
 Auth::routes();
 
