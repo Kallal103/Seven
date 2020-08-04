@@ -6,13 +6,28 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+
 class UserController extends Controller
 {
-    public function index(){
+    public function uploadAvatar(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            User::uploadAvatar($request->image);
+            
+            return redirect()->back()->with('message', 'Image Uploaded.'); // success message
+        }
+        
+        return redirect()->back()->with('error', 'Image not Uploaded.'); // error message
+    }
+
+ 
+    public function index()
+    {
         $data = [
             'name' => 'VISER X',
             'email' => 'viserx@test.com',
-            'password' =>'password'
+            'password' => 'password'
         ];
         //User::create($data);
         // $user = new User();
@@ -30,7 +45,7 @@ class UserController extends Controller
 
         //dd($user);
 
-        
+
         // DB::insert('insert into users(name,email,password)values(?,?,?)',[
         //   'kallal test','kallal@test.com', 'password'  
         // ]);
