@@ -9,6 +9,7 @@
 </div>
 
     <ul class="my-5">
+        <x-alert />
         @foreach ($todos as $todo)
         <li class=" flex justify-center py-2">
             <p>{{$todo->title}}</p>
