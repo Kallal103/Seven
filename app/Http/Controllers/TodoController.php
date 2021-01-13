@@ -47,4 +47,15 @@ class TodoController extends Controller
         return redirect()->back()->with('message', 'task marked as completed!');
 
     }
+
+     /**
+     *
+     * @param \App\Todo $todo
+     * @return void
+     */
+    public function incomplete(Todo $todo){
+        $todo->update(['completed'=> false]);
+        return redirect()->back()->with('message', 'task marked as Incompleted!');
+
+    }
 }
