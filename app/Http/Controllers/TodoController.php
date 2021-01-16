@@ -63,7 +63,7 @@ class TodoController extends Controller
      * @param \App\Todo $todo
      * @return void
      */
-    public function delete(Todo $todo){
+    public function destroy(Todo $todo){
         $todo->delete();
         return redirect()->back()->with('message', 'task Deleted!');
 
