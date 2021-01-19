@@ -27,6 +27,12 @@ class TodoController extends Controller
 
     }
 
+    public function show(Todo $todo)
+    {
+        return view('todos.show', compact('todo'));
+
+    }
+
     public function store(TodoCreateRequest $request){
         // $userId = auth()->id();
         // $request['user_id'] = $userId;
@@ -42,7 +48,8 @@ class TodoController extends Controller
     }
 
     public function update(TodoCreateRequest $request, Todo $todo){
-        $todo->update(['title' =>$request->title]);
+        $todo->update(['title' =>$request->title,
+        'description' => $request->description]);
         return redirect(route('todo.index'))->with('message','updated!');
     }
     /**
