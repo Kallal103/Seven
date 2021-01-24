@@ -4,10 +4,10 @@
             <span wire:click="increment" class="fas fa-plus px-2 py-1 cursor-pointer"/>
     </div>
     @foreach($steps as $step)
-     <div class="flex justify-center py-2">
+     <div class="flex justify-center py-2" wire:key="{{$step}}">
         <input type="text" name="step[]" class=" py-1 px-2 border rounded"
-        placeholder="{{'Describe Step'. $step}}">
-        <span class="fas fa-times text-red-400 p-2 cursor-pointer" wire:click="remove({{$loop->index}})" />
+        placeholder="{{'Describe Step'. ($step+1)}}">
+        <span class="fas fa-times text-red-400 p-2 cursor-pointer" wire:click="remove({{$step}})" />
      </div>
 
     @endforeach
