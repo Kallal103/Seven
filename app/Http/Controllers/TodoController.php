@@ -37,7 +37,14 @@ class TodoController extends Controller
         //dd($request->all());
         // $userId = auth()->id();
         // $request['user_id'] = $userId;
-        auth()->user()->todos()->create($request->all());
+        $todo = auth()->user()->todos()->create($request->all());
+        if($request->step){
+            foreach($request->step as $step ){
+                $todo->steps()->create(['name' => $step]);
+            }
+        }
+
+
         //Todo::create($request->all());
         return redirect(route('todo.index'))->with('message','Todo is created successfully');
     }
@@ -80,6 +87,7 @@ class TodoController extends Controller
      * @return void
      */
     public function destroy(Todo $todo){
+        $todo->steps->each->delete();
         $todo->delete();
         return redirect()->back()->with('message', 'task Deleted!');
 
